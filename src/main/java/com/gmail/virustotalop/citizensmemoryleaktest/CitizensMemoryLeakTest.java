@@ -45,35 +45,47 @@ public class CitizensMemoryLeakTest extends JavaPlugin {
 		this.registry = CitizensAPI.createAnonymousNPCRegistry(dataStore);
 		this.getServer().getScheduler().scheduleSyncRepeatingTask(this, () ->
 		{
-			if(this.mode == 1)
+			if(this.mode == 0)
 			{
-				Iterator<NPC> it = this.registry.iterator();
-				while(it.hasNext())
+				this.registry.deregisterAll();
+			}
+			else if(this.mode == 1)
+			{
+				List<NPC> npcs = this.getNPCS();
+				
+				for(NPC npc : npcs)
 				{
-					NPC next = it.next();
-					next.destroy();
+					npc.destroy();
 				}
 			}
 			else if(this.mode == 2)
 			{
-				Iterator<NPC> it = this.registry.iterator();
-				while(it.hasNext())
+				List<NPC> npcs = this.getNPCS();
+				for(NPC npc : npcs)
 				{
-					NPC next = it.next();
-					next.destroy();
-					next.despawn();
+					npc.destroy();
+					npc.despawn();
 				}
 			}
-			
-			this.registry.deregisterAll();
 			
 			for(int i = 0; i < this.npcLocations.size(); i++)
 			{
 				NPC npc = this.registry.createNPC(EntityType.PLAYER, "memory-test-" + i);
 				npc.spawn(this.npcLocations.get(i));
 			}
-			
 		}, this.npcUpdateInterval, this.npcUpdateInterval);
+	}
+	
+	private List<NPC> getNPCS()
+	{
+		List<NPC> npcs = new ArrayList<>();
+		Iterator<NPC> it = this.registry.iterator();
+		while(it.hasNext())
+		{
+			npcs.add(it.next());
+		}
+		
+		return npcs;
 	}
 	
 	@Override

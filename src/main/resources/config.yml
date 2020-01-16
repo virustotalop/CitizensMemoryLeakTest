@@ -1,7 +1,7 @@
 mode: 0
 #0 - deregisters all
-#1 - destroys npcs and deregisters all
-#2 - destroys, despawns and deregisters all
+#1 - destroys npcs
+#2 - destroys and despawns npcs
 npc-locations:
 - "world,0,0,0"
 npc-update-interval: 20 #Update interval in ticks
