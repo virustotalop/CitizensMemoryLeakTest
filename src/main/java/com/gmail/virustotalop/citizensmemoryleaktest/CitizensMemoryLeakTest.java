@@ -43,6 +43,8 @@ public class CitizensMemoryLeakTest extends JavaPlugin {
 		
 		MemoryNPCDataStore dataStore = new MemoryNPCDataStore();
 		this.registry = CitizensAPI.createAnonymousNPCRegistry(dataStore);
+		
+		this.getLogger().info("Citizens memory test starting in mode " + this.mode);
 		this.getServer().getScheduler().scheduleSyncRepeatingTask(this, () ->
 		{
 			if(this.mode == 0)
