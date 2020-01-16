@@ -1,0 +1,5 @@
+name: "CitizensMemoryLeakTest"
+main: "com.gmail.virustotalop.citizensmemoryleaktest.CitizensMemoryLeakTest"
+version: "1.0.0"
+author: "VirusTotal"
+depend: ["Citizens"]
